@@ -1,0 +1,93 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="template.xhtml">
+
+	<ui:define name="conteudo">
+	
+<!-- 	<script> PrimeFaces.locales['pt'] = { closeText: 'Fechar', prevText: 'Anterior', nextText: 'Próximo', currentText: 'Começo', monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'], monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'], dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'], dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'], dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'], weekHeader: 'Semana', firstDay: 0, isRTL: false, showMonthAfterYear: false, yearSuffix: '', timeOnlyTitle: 'Só Horas', timeText: 'Tempo', hourText: 'Hora', minuteText: 'Minuto', secondText: 'Segundo', ampm: false, month: 'Mês', week: 'Semana', day: 'Dia', allDayText: 'Todo o Dia' }; </script> -->
+	
+		<f:view>
+			<center>
+		
+				<h:form id="form">
+					<p:growl id="growl" showDetail="false" sticky="false"  life="5000" /> 
+					<p:panel id="panel" header="Cadastro de Eventos">
+						<p:panelGrid id="pgDados" columns="2" styleClass="semBorda">
+																	 
+							<p:inputText value="#{eventoController.entity.nome}" placeholder="Nome"/>
+							
+						<p:calendar id="entrada"
+
+								value="#{eventoController.entity.data}" locale="pt_BR"
+								
+								pattern="dd/MM/yyyy" 
+								
+								timeZone="America/Araguaina" mask="true"
+								
+								placeholder="Data da entrada" 
+						
+							/> 
+							<p:selectOneMenu id = "TipoEvento"
+								value = "#{eventoController.entity.tipoEvento}">
+								<f:selectItem itemLabel= "Tipo de Evento" itemValue = ""/>
+								<f:selectItems value ="#{eventoController.tipoEvento}" var="st"
+									itemValue="#{st}" itemLabel = "#{st.nome}"/>
+							</p:selectOneMenu>
+							
+						</p:panelGrid>
+						<br/>
+						
+						<p:commandButton value="Incluir" 
+							actionListener="#{eventoController.insert}" 
+							disabled="#{eventoController.entity.id != null}"
+							process="panel" update="form" />
+						
+						<p:commandButton value="Alterar" 
+							actionListener="#{eventoController.update}" 
+							disabled="#{eventoController.entity.id == null}"
+							process="panel" update="form" />
+				
+						<p:commandButton value="Excluir" 
+							actionListener="#{eventoController.delete}" 
+							disabled="#{eventoController.entity.id == null}"	
+							process="panel" update="form" />
+						
+						<p:commandButton value="Limpar" icon="" 
+							actionListener="#{eventoController.clean}" 
+							process="panel" update="form" />
+					</p:panel>
+						<br/>
+					<p:separator id="separator" />
+					<br/>
+					<p:dataTable  id="dataTable" 
+					value="#{eventoController.listaEvento}" var="objeto" 
+ 						widgetVar="dataTableWV" >
+ 					<p:column>
+ 						<f:facet name="header">Nome</f:facet>
+ 	    					#{objeto.nome}
+ 	    			</p:column>
+ 	    			<p:column>
+ 						<f:facet name="header">Tipo Evento</f:facet>
+ 	    					#{objeto.tipoEvento}
+ 	    			</p:column>
+ 					<p:column>
+ 						<f:facet name="header">Data</f:facet>
+							#{eventoController.convertData(objeto.data)}
+ 	    				
+ 	    			</p:column> 
+					
+ 					<p:column> 
+ 							<f:facet name="header">Ação</f:facet> 
+ 							<p:commandButton value="Editar" update="form" icon="fa fa-bug">
+ 								<f:setPropertyActionListener
+ 									target="#{eventoController.entity}" value="#{objeto}" /> 
+ 							</p:commandButton> 
+ 						</p:column> 
+					</p:dataTable>
+				</h:form>
+			</center>	
+		</f:view>
+	</ui:define>
+</ui:composition>

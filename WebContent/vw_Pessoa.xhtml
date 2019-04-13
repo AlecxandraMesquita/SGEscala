@@ -1,0 +1,60 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/template.xhtml">
+
+<ui:define name="conteudo">
+
+<f:view>
+<center>
+
+	<h:form id="form">
+		<p:growl id="growl" showDetail="false" sticky="false"  life="5000" /> 
+			<p:panel id="panel" header="Pessoa">
+			<p:panelGrid id="pgDados" columns="2" styleClass="semBorda" >			
+			</p:panelGrid>
+		</p:panel>
+					
+		<!-- <br/>
+		<p:separator id="separator" />
+		<br/>
+		
+			<h:outputText value="Click no PDF para gerar o relatório dos procedimentos:" />
+			<div  style="top: 100px;">
+			<h:commandLink >
+			<p:fileDownload value="#{Echurch_mcvController.relatorio.pdf}" />
+			<p:graphicImage library="img" name="pdf.png" title="Imprimir PDF"/>
+			</h:commandLink>
+			</div> -->
+			<br/>
+		 <p:separator />
+		
+		<p:dataTable id="dataTable" value="#{echurch_mcvController.listaPessoa}" var="objeto" widgetVar="dataTableWV" >	
+			
+			<p:column >
+				<f:facet name="header">Nome</f:facet>
+	    				#{objeto.nome}
+	    		</p:column>
+	    	<p:column>
+				<f:facet name="header">Telefone</f:facet>
+	    				#{objeto.telefone}
+	    		</p:column>
+	    	<p:column>
+				<f:facet name="header">E-mail</f:facet>
+	    				#{objeto.gmail}
+	    		</p:column>
+
+			<p:column>
+				<f:facet name="header">CPF</f:facet>
+	    				#{objeto.cpf}
+	    		</p:column>
+    			    		
+		</p:dataTable>
+	
+	</h:form>
+</center>	
+</f:view>
+
+</ui:define>
+</ui:composition>

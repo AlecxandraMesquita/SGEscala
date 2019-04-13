@@ -1,0 +1,48 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="template.xhtml">
+
+	<ui:define name="conteudo">
+	
+		<f:view>
+			<center>
+		
+				<h:form id="form">
+					<p:growl id="growl" showDetail="false" sticky="false"  life="5000" /> 
+					<p:panel id="panel" header="Equipe">
+						<p:panelGrid id="pgDados" columns="2" styleClass="semBorda">
+							<p:selectOneMenu id = "CorEquipes"
+								value = "#{turmaVoluntarioController.entity.cor}">
+								<f:converter converterId = "CorEquipesConverter" />
+								<f:selectItem itemLabel= "Cor da Turma" />
+								<f:selectItems value ="#{turmaVoluntarioController.listaCor}" var="st"
+									itemValue="#{st}" itemLabel = "#{st.nome}"/>
+							</p:selectOneMenu>
+						</p:panelGrid>	
+						<br/>
+							<p:commandButton value="Selecinar" 
+								actionListener="#{turmaVoluntarioController.buscaTurmaByCor}"
+								disabled ="#{turmaVoluntarioController.entity.id != null}"
+								process="panel" update="form" />	
+					</p:panel>
+						<p:dataTable id="dataTable" value="#{turmaVoluntarioController.listaTurma}" var="objeto"
+							widgetVar="dataTableWV" >
+							
+								<p:column>
+									<f:facet name="header">Nome</f:facet>
+				    				#{objeto.voluntario.pessoa.nome}
+					    		</p:column>
+								
+								<p:column>
+									<f:facet name="header">Telefone</f:facet>
+					    				#{objeto.voluntario.pessoa.telefone}
+					    		</p:column>
+					    		
+						</p:dataTable>				
+				</h:form>
+			</center>	
+		</f:view>
+	</ui:define>
+</ui:composition>

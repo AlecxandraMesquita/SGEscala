@@ -34,7 +34,7 @@
 					<h:outputText value="#{objeto.nome}" />
 				</p:column>
 				<p:column style="width:60px;text-align: center">
-					<p:commandButton update=":form" icon="ui-icon-search" actionListener="#{pessoaListController.onSelect(objeto)}" >
+					<p:commandButton update=":form" icon="ui-icon-check" actionListener="#{pessoaListController.onSelect(objeto)}" >
 						<f:setPropertyActionListener target="#{pessoaListController.entity}"	value="#{objeto}"  />
 					</p:commandButton>
 				</p:column>				

@@ -6,7 +6,7 @@ import javax.persistence.Persistence;
 
 public class JPAFactory {
 
-private static EntityManagerFactory em = Persistence.createEntityManagerFactory("SGEEscala");
+private static EntityManagerFactory em = Persistence.createEntityManagerFactory("SGEscala");
 
 	private JPAFactory() {}
 	

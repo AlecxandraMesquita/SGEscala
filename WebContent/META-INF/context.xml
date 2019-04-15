@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context reloadable="true">
-	<Resource name="jdbc/escalaTrilhar" 
+	<Resource name="jdbc/sgescala" 
 		auth="Container" 
 		type="javax.sql.DataSource"
 		maxActive="100"
@@ -9,5 +9,5 @@
 		username="root" 
 		password="123" 
 		driverClassName="com.mysql.cj.jdbc.Driver"
-		url="jdbc:mysql://10.42.0.97:3306/escalaTrilhar?useUnicode=true&amp;characterEncoding=UTF-8&amp;characterSetResults=UTF-8" />
+		url="jdbc:mysql://127.0.0.1:3306/sgescala?useUnicode=true&amp;characterEncoding=UTF-8&amp;characterSetResults=UTF-8" />
 </Context>
